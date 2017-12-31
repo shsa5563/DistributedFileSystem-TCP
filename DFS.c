@@ -67,7 +67,7 @@ int getFileFromServer(int sock, char * filePathInput, int fileSize)
     printf("The file name is :%s",filePathInput);
      packetInfo * tcpPacketInfo = (packetInfo *) malloc(sizeof(packetInfo));
     int fileSizeCounter = 0, readBytes = 0, sendBytes = 0;
-    char * fileName = (char *)malloc(sizeof(strlen(filePathInput)));
+    char * fileName = (char *)malloc(sizeof(filePathInput));
     memset(fileName,'\0', strlen(filePathInput));
     FILE* fileOpen = NULL;
     fileOpen = fopen(filePathInput, "rb+"); 
