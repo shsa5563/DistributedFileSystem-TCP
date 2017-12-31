@@ -338,6 +338,7 @@ int putFileToServer(char * filePathInput,char * serverFolderPath, int fileSize)
     int totalCounter = 0;
     size_t length = sizeof(packetInfo);
     int serverVisit =0;
+    int fileChunkCounter = 0;
     //printf("Mod Value: %d\n",modVal);modVal=0;
 	DEBUG(for(int i=0;i<4;i++) printf("sockID :%d status :%d\n",serverStatus->sockID[i],serverStatus->status[i]));
     for(int i=modVal; serverVisit<_global_Counter; i++)
@@ -347,7 +348,8 @@ int putFileToServer(char * filePathInput,char * serverFolderPath, int fileSize)
 	int j =((i-1)<0?3:i-1);
         memset(tcpPacketInfo, '\0', length);
         sprintf(tcpPacketInfo->command,"%s",PUT_COMMAND); 
-	sprintf(tcpPacketInfo->fileName,"%s.%d",filePathInput,i);
+	sprintf(tcpPacketInfo->fileName,"%s.%d",filePathInput,fileChunkCounter);
+	fileChunkCounter++;
 	if(serverStatus->status[i]||serverStatus->status[j])
 	{	
                 if(serverVisit==(_global_Counter-1)) fileChunkSize = fileSize-totalCounter;
